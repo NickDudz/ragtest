@@ -1,0 +1,42 @@
+
+paths:
+  data_dir: "./data"
+  storage_dir: "./storage"
+  outputs_dir: "./outputs"
+
+embedder:
+  provider: "ollama"            # options: ollama | sentence-transformers (future)
+  model: "nomic-embed-text"     # if using ollama, pull this first
+  batch_size: 64
+
+llm:
+  provider: "ollama"
+  model: "qwen2.5:7b-instruct"
+  temperature: 0.2
+  max_tokens: 1024
+
+chunking:
+  profile: "paper"              # options: paper | notes | legal
+  size: 900
+  overlap: 150
+
+retrieval:
+  top_k: 6
+  re_rank: false
+  min_score: 0.15
+
+prompting:
+  system: |
+    You are a precise research assistant. Use only the provided context.
+    If the answer is not in the context, say you don't know.
+    Always include citations like [S1], [S2] which map to the listed sources.
+  template: |
+    <question>
+    {question}
+    </question>
+
+    <context>
+    {context}
+    </context>
+
+    Provide a concise answer with citations [S1], [S2]... at the end of sentences.

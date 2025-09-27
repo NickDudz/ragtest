@@ -1,0 +1,25 @@
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Project storage
+storage/
+outputs/
+*.log
+
+# Development notes
+prompt.md
+
+# OS
+.DS_Store
+Thumbs.db
