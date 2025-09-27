@@ -8,12 +8,12 @@ Drop documents into `data/`, run `ingest`, then `ask` questions with grounded ci
 
 ## Features
 - **One-command ingest:** `python rag.py ingest` parses PDFs/MD/TXT and builds a local index.
-- **Local embeddings + vector DB:** Defaults to **ChromaDB**.
 - **RAG querying:** `python rag.py ask "question"` → answer with **[S1]**-style citations.
+- **Web interface:** `python web_server.py` → modern React UI at http://localhost:8000.
+- **Local embeddings + vector DB:** Defaults to **ChromaDB**.
 - **Model-agnostic:** Works with **Ollama** (Qwen/Llama/Phi). Swap models via `rag.yaml`.
 - **Chunking profiles:** `paper`, `notes`, `legal` tuned for different formats.
 - **Config-driven:** Single `rag.yaml` controls paths, chunking, retrieval, and LLMs.
-- **Extensible:** Add rerankers or a small web UI later without touching the core.
 
 ---
 
@@ -34,6 +34,10 @@ ollama pull nomic-embed-text
 # Add docs into .\data\
 python rag.py ingest
 python rag.py ask "Summarize Paper X in 5 bullets with citations."
+
+# Or use the web interface:
+python rag.py web
+# Open http://localhost:8000
 ```
 
 ### Project Layout
@@ -42,8 +46,10 @@ RAGtest/
 ├─ data/                     # your PDFs/MD/TXT
 ├─ storage/                  # vector DB + metadata (gitignored)
 ├─ outputs/                  # answers, logs, exports
+├─ templates/                # web UI templates
 ├─ rag.yaml                  # configuration
 ├─ rag.py                    # CLI (ingest, ask, eval, clear)
+├─ web_server.py             # FastAPI web server
 └─ ragtoolkit/
    ├─ loaders.py             # file loaders & text cleaning
    ├─ chunkers.py            # chunk strategies & profiles
@@ -59,10 +65,10 @@ RAGtest/
 ---
 
 ## Demo Script (2 minutes)
-1. Show a couple of PDFs/notes in `data/`.
+1. Add PDFs/notes to `data/`.
 2. `python rag.py ingest` → watch counts.
 3. `python rag.py ask "Key findings of Paper X?"` → answer + citations.
-4. Open `outputs/last_answer.md` to reveal saved result & sources.
+4. Or `python rag.py web` → open http://localhost:8000 for web UI.
 
 
 **License:** MIT 

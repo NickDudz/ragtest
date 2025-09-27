@@ -82,5 +82,16 @@ def export(
     shutil.copy2(src, out)
     print(f"[green]Exported[/green] {src} -> {out}")
 
+@app.command()
+def web(
+    port: int = typer.Option(8000, help="Port to run web server on"),
+    host: str = typer.Option("0.0.0.0", help="Host to bind to"),
+):
+    """Start the web interface server."""
+    import uvicorn
+    print(f"[green]Starting web server at[/green] http://{host}:{port}")
+    print("[cyan]Press Ctrl+C to stop[/cyan]")
+    uvicorn.run("web_server:app", host=host, port=port, reload=False)
+
 if __name__ == "__main__":
     app()

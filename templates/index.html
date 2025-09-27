@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Toolkit</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc; 
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+        .header p { 
+            color: #64748b; 
+            font-size: 1.1rem;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        .panel h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: #6b7280;
+        }
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+        .status {
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .status.error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        .status.info {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+        .answer {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            white-space: pre-wrap;
+        }
+        .sources {
+            margin-top: 1rem;
+        }
+        .source {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .source-id {
+            font-weight: 600;
+            color: #3b82f6;
+            margin-right: 0.5rem;
+        }
+        .source-path {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .source-text {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [question, setQuestion] = useState('');
+            const [answer, setAnswer] = useState('');
+            const [sources, setSources] = useState([]);
+            const [loading, setLoading] = useState(false);
+            const [status, setStatus] = useState(null);
+            const [ingestLoading, setIngestLoading] = useState(false);
+
+            const askQuestion = async () => {
+                if (!question.trim()) return;
+                
+                setLoading(true);
+                setStatus(null);
+                
+                try {
+                    const response = await fetch('/api/ask', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question: question.trim() })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    setAnswer(data.answer);
+                    setSources(data.sources);
+                    setStatus({ type: 'success', message: 'Question answered successfully!' });
+                } catch (error) {
+                    setStatus({ type: 'error', message: `Error: ${error.message}` });
+                    setAnswer('');
+                    setSources([]);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const ingestDocuments = async () => {
+                setIngestLoading(true);
+                setStatus(null);
+                
+                try {
+                    const response = await fetch('/api/ingest', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({})
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    setStatus({ 
+                        type: 'success', 
+                        message: `${data.message}. Ready for questions!` 
+                    });
+                } catch (error) {
+                    setStatus({ type: 'error', message: `Error: ${error.message}` });
+                } finally {
+                    setIngestLoading(false);
+                }
+            };
+
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    askQuestion();
+                }
+            };
+
+            return (
+                <div className="container">
+                    <div className="header">
+                        <h1>RAG Toolkit</h1>
+                        <p>Ask questions about your documents with grounded citations</p>
+                    </div>
+
+                    {status && (
+                        <div className={`status ${status.type}`}>
+                            {status.message}
+                        </div>
+                    )}
+
+                    <div className="main-content">
+                        <div className="panel">
+                            <h2>Ask a Question</h2>
+                            <div className="form-group">
+                                <label htmlFor="question">Question</label>
+                                <textarea
+                                    id="question"
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    onKeyPress={handleKeyPress}
+                                    placeholder="What would you like to know about your documents?"
+                                    disabled={loading}
+                                />
+                            </div>
+                            <button 
+                                className="btn" 
+                                onClick={askQuestion} 
+                                disabled={loading || !question.trim()}
+                            >
+                                {loading ? <span className="loading"></span> : 'Ask Question'}
+                            </button>
+                            <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#64748b' }}>
+                                Press Ctrl+Enter to ask
+                            </p>
+                        </div>
+
+                        <div className="panel">
+                            <h2>Manage Documents</h2>
+                            <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                                Add documents to the <code>data/</code> folder, then ingest them here.
+                            </p>
+                            <button 
+                                className="btn btn-secondary" 
+                                onClick={ingestDocuments} 
+                                disabled={ingestLoading}
+                            >
+                                {ingestLoading ? <span className="loading"></span> : 'Ingest Documents'}
+                            </button>
+                        </div>
+                    </div>
+
+                    {answer && (
+                        <div className="panel">
+                            <h2>Answer</h2>
+                            <div className="answer">{answer}</div>
+                            
+                            {sources.length > 0 && (
+                                <div className="sources">
+                                    <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Sources</h3>
+                                    {sources.map((source, index) => (
+                                        <div key={index} className="source">
+                                            <span className="source-id">[{source.id}]</span>
+                                            <span className="source-path">{source.path}</span>
+                                            {source.page && <span> (page {source.page})</span>}
+                                            <div className="source-text">{source.text}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
