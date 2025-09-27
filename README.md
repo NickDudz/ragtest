@@ -1,10 +1,8 @@
 
 # Local RAG Toolkit — Private, Fast, Fully Offline
 
-A self-contained **Retrieval-Augmented Generation** stack for Windows. No cloud services.  
+A self-contained **Retrieval-Augmented Generation** stack for Windows.
 Drop documents into `data/`, run `ingest`, then `ask` questions with grounded citations.
-
-> **Pitch:** Your knowledge, your GPU, your rules. Build a local vector index from your PDFs and notes, query with a local LLM, and get answers that cite their sources.
 
 ---
 
@@ -66,13 +64,5 @@ RAGtest/
 3. `python rag.py ask "Key findings of Paper X?"` → answer + citations.
 4. Open `outputs/last_answer.md` to reveal saved result & sources.
 
----
 
-## Roadmap
-- Minimal **web UI** (FastAPI + small React) for search + preview.
-- Optional **reranking** for very long corpora.
-- **Incremental ingest** (hash-based change detection).
-- **Observability**: timings, top-k scores, index stats.
-- **OCR** pipeline for scanned PDFs.
-
-**License:** MIT • **Status:** MVP (CLI first), UI planned.
+**License:** MIT 
