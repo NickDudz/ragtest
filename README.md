@@ -1,5 +1,5 @@
 
-# Local RAG Toolkit — Private, Fast, Fully Offline
+# Local RAG Toolkit
 
 A self-contained **Retrieval-Augmented Generation** stack for Windows.
 Drop documents into `data/`, run `ingest`, then `ask` questions with grounded citations.
