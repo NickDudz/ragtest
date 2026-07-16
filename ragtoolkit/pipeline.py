@@ -47,12 +47,17 @@ def ingest_corpus(cfg: Config) -> Dict[str, int]:
                     "path": d["path"],
                     "page": d["page"],
                     "source": d["doc_id"],
-                    "span": ch["span"],
+                    "span_start": int(ch["span"][0]),
+                    "span_end": int(ch["span"][1]),
                 }
             })
 
     # Embed and upsert in batches
-    embedder = OllamaEmbedder(cfg.embedder["model"])
+    embedder_base_url = cfg.embedder.get("base_url") or cfg.embedder.get("url")
+    embedder = OllamaEmbedder(
+        cfg.embedder["model"],
+        base_url=str(embedder_base_url) if embedder_base_url else None,
+    )
     batch = int(cfg.embedder.get("batch_size", 64))
     with Timer("embed+upsert") as t:
         collection = get_or_create_collection(storage_dir, "rag")
@@ -71,7 +76,11 @@ def ask_question(cfg: Config, question: str) -> Tuple[str, List[Dict]]:
     top_k = int(cfg.retrieval.get("top_k", 6))
     min_score = float(cfg.retrieval.get("min_score", 0.0))
 
-    embedder = OllamaEmbedder(cfg.embedder["model"])
+    embedder_base_url = cfg.embedder.get("base_url") or cfg.embedder.get("url")
+    embedder = OllamaEmbedder(
+        cfg.embedder["model"],
+        base_url=str(embedder_base_url) if embedder_base_url else None,
+    )
     hits = retrieve(storage_dir, embedder, question, top_k=top_k, min_score=min_score)
 
     system = cfg.prompting["system"]
@@ -80,7 +89,20 @@ def ask_question(cfg: Config, question: str) -> Tuple[str, List[Dict]]:
     context = render_context(hits)
     prompt = compose_prompt(system, template, question, context)
 
-    llm = OllamaLLM(cfg.llm["model"], cfg.llm.get("temperature", 0.2), cfg.llm.get("max_tokens", 1024))
+    llm_base_url = cfg.llm.get("base_url") or cfg.llm.get("url")
+    seed = cfg.llm.get("seed")
+    llm = OllamaLLM(
+        cfg.llm["model"],
+        cfg.llm.get("temperature", 0.2),
+        cfg.llm.get("max_tokens", 1024),
+        base_url=str(llm_base_url) if llm_base_url else None,
+        seed=int(seed) if seed is not None else None,
+        context_window=(
+            int(cfg.llm["context_window"])
+            if cfg.llm.get("context_window") is not None
+            else None
+        ),
+    )
     answer = llm.generate(prompt["system"], prompt["user"])
 
     return answer, hits

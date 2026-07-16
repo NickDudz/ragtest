@@ -11,9 +11,10 @@ embedder:
 
 llm:
   provider: "ollama"
-  model: "qwen2.5:7b-instruct"
+  model: "qwen2.5:7b-instruct-q4_K_M"
   temperature: 0.2
   max_tokens: 1024
+  context_window: 8192
 
 chunking:
   profile: "paper"              # options: paper | notes | legal

@@ -1,0 +1,59 @@
+version: 1
+name: meridian-v1
+dataset: evaluation/golden.jsonl
+corpus_manifest: evaluation/corpus_manifest.yaml
+output_dir: artifacts/evaluation
+seed: 7
+
+runs:
+  warmup_queries: 1
+  measured_repetitions: 1
+
+models:
+  embedding:
+    provider: ollama
+    base_url: http://localhost:11434
+    model: nomic-embed-text:latest
+  generation:
+    provider: ollama
+    base_url: http://localhost:11434
+    model: qwen2.5:7b-instruct-q4_K_M
+    temperature: 0
+    max_tokens: 256
+    context_window: 8192
+
+prompt:
+  system: |
+    You are a precise research assistant. Use only the supplied context.
+    If the context does not contain the answer, respond exactly: I don't know based on the provided context.
+    Cite supporting context IDs in square brackets, such as [S1].
+    Do not cite a context ID that does not support the claim.
+  template: |
+    <question>
+    {question}
+    </question>
+
+    <context>
+    {context}
+    </context>
+
+    Answer concisely. Put citations immediately after the claims they support.
+
+retrieval:
+  top_k: 6
+  min_score: null
+  rerank: false
+
+experiments:
+  - id: baseline_900_150
+    description: Existing paper-profile chunk geometry.
+    chunking:
+      profile: paper
+      size: 900
+      overlap: 150
+  - id: focused_500_80
+    description: Smaller chunks with proportionally similar overlap.
+    chunking:
+      profile: paper
+      size: 500
+      overlap: 80

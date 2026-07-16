@@ -15,6 +15,7 @@ venv/
 # Project storage
 storage/
 outputs/
+.eval_cache/
 *.log
 
 # Development notes
