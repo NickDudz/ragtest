@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "run_id": "meridian-v1-20260716T175543Z-c3a8dabf",
+  "status": "completed",
+  "started_at": "2026-07-16T17:55:47.492916Z",
+  "finished_at": "2026-07-16T18:02:39.540787Z",
+  "reproduction_command": "python rag.py eval --config evaluation/experiments.yaml",
+  "git": {
+    "commit": "99caf49547476d06b9e41bac57acc975e57d8cf2",
+    "dirty": true,
+    "status": [
+      "M .gitignore",
+      " M README.md",
+      " M rag.py",
+      " M rag.yaml",
+      " M ragtoolkit/embeddings.py",
+      " M ragtoolkit/llm.py",
+      " M ragtoolkit/pipeline.py",
+      " M ragtoolkit/retriever.py",
+      " M ragtoolkit/vectordb.py",
+      " M requirements.txt",
+      "?? docs/evaluation/ARCHITECTURE.md",
+      "?? evaluation/README.md",
+      "?? evaluation/corpus/LICENSE",
+      "?? evaluation/corpus/access_control.md",
+      "?? evaluation/corpus/backup_recovery.md",
+      "?? evaluation/corpus/cold_chain_shipping.md",
+      "?? evaluation/corpus/data_retention.md",
+      "?? evaluation/corpus/fleet_maintenance.md",
+      "?? evaluation/corpus/incident_response.md",
+      "?? evaluation/corpus/remote_site_networking.md",
+      "?? evaluation/corpus/sensor_calibration.md",
+      "?? evaluation/corpus_manifest.yaml",
+      "?? evaluation/experiments.yaml",
+      "?? evaluation/golden.jsonl",
+      "?? ragtoolkit/evaluation/__init__.py",
+      "?? ragtoolkit/evaluation/citations.py",
+      "?? ragtoolkit/evaluation/dataset.py",
+      "?? ragtoolkit/evaluation/metrics.py",
+      "?? ragtoolkit/evaluation/report.py",
+      "?? ragtoolkit/evaluation/runner.py",
+      "?? requirements-lock.txt",
+      "?? tests/test_citations.py",
+      "?? tests/test_dataset.py",
+      "?? tests/test_experiment_config.py",
+      "?? tests/test_metrics.py",
+      "?? tests/test_ollama_adapters.py"
+    ],
+    "tracked_diff_sha256": "8baa04daf51b289b4a1e41350d10602747ea35f78acc040ad8c7e027a1c628d0",
+    "untracked_files": {
+      "docs/evaluation/ARCHITECTURE.md": "019ef5a58d41a20abd615e1bfc3b8248b1ed8e77415644e00b9f933ddbe0fb2b",
+      "evaluation/README.md": "6eabd42f094eccfa4115cc700604ca1c1a11a7afccfecc027ed8b3ebb0321e60",
+      "evaluation/corpus/LICENSE": "52dee0f8610ec1a7c9d76eccc98604b03ee328e4336cdc1776147f20948f2201",
+      "evaluation/corpus/access_control.md": "17e97722b60d01e86f43ce2e5fc15996b7b55b714b83ff4571fe052451214912",
+      "evaluation/corpus/backup_recovery.md": "71e2f7cd353a78b3011ee6e7e46fd8ae9638e862ca8eaec36b75d47e9b0bf6f5",
+      "evaluation/corpus/cold_chain_shipping.md": "a44b5a73f3e135a341670485f957b75b45e2f51a53463ab16d95e8fbe5f81797",
+      "evaluation/corpus/data_retention.md": "09be45b6f0028596af397ee01b4685aaec735f4389b683218a328198e501d46e",
+      "evaluation/corpus/fleet_maintenance.md": "aab1ba70b0c12d01476f12c6f8ab83d49b410a8ce29359aa5b8b2b4aecf8618c",
+      "evaluation/corpus/incident_response.md": "d50b5558fe2d18066545c3ef4331a745083debbbce5c3588055eff938e8eec79",
+      "evaluation/corpus/remote_site_networking.md": "6ba57b0f5b7e7d1ac9315b64d92e6ac16e8d91738aa70b9862a78598a8220276",
+      "evaluation/corpus/sensor_calibration.md": "fc98bc7f14d39ee35024fe9a1d5a5332171e5b920994cb00e83cdee58cffdf38",
+      "evaluation/corpus_manifest.yaml": "10f60c74bbaeb7877c35f4f2c93eeb60c653e74a8006735a0e7c66b232c4dc90",
+      "evaluation/experiments.yaml": "ed361e16fedced7276e3751662c393b1a5be4e8f42366958cc74cc8e5e611c56",
+      "evaluation/golden.jsonl": "1f9c5715f286a602b3fcb28a352841631540293a65736de92eeedf4cddbbd9a5",
+      "ragtoolkit/evaluation/__init__.py": "f5e6528840a55d8ec886edaba8050065c28bd86f9cd6ab4176904f1ec96a05f0",
+      "ragtoolkit/evaluation/citations.py": "e2ef30d7506d26d23c07cfdd90867ea6f55024bdf9bbd36c588b108274df264c",
+      "ragtoolkit/evaluation/dataset.py": "0ad20114f51231e3282e95d5e85d5b33369700f5290d08546f64eaeb0a259ebb",
+      "ragtoolkit/evaluation/metrics.py": "e31d38a49d28c2fba4e83827e0fd54d0836b9d82bc4af59cde0bea871dae588d",
+      "ragtoolkit/evaluation/report.py": "f17bd6cae6fdb8e7b8d37630c1dcee2661d6d59062847ae6acd70c765b0c70cc",
+      "ragtoolkit/evaluation/runner.py": "3322ae2860ed0311e131f691be936818437fb6dedf0da5bfe9d53dab723a1120",
+      "requirements-lock.txt": "f5f653a0c275f5287d7f251b607cb2abb9c1f4146c4a462586e00197a06a679d",
+      "tests/test_citations.py": "7505f65d9367a8559692a8466d8ccd1ab135a3355a6e69916efe688049944802",
+      "tests/test_dataset.py": "e59e2cc9212221f2964029224218d2be10653e1d23e18fc55e3245e36155bea6",
+      "tests/test_experiment_config.py": "742dcc51b79029946c8e1c4dd8f276960886a23e6cabc5f0cb6f0e20a8694f36",
+      "tests/test_metrics.py": "f40405b9ac3bc036b7315823815b09c2f576f7e20df191f3cc9358c845f75bf5",
+      "tests/test_ollama_adapters.py": "1b7e243b5d85c34c4c309c4bd684b74cdb3e8ebec9931e1fc230138cd4abd33c"
+    },
+    "workspace_state_sha256": "1d22c3661499ec02403d6677fa621996b33efd96f4cfb552ab12dba584565726"
+  },
+  "python": {
+    "version": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Projects\\RAGtest\\.venv\\Scripts\\python.exe",
+    "packages": {
+      "chromadb": "0.5.23",
+      "pypdf": "6.14.2",
+      "markdown-it-py": "4.2.0",
+      "typer": "0.27.0",
+      "pydantic": "2.13.4",
+      "requests": "2.34.2",
+      "rich": "15.0.0",
+      "tqdm": "4.68.4",
+      "numpy": "2.5.1",
+      "fastapi": "0.139.2",
+      "uvicorn": "0.51.0",
+      "jinja2": "3.1.6",
+      "PyYAML": "6.0.3",
+      "pytest": "9.1.1",
+      "pandas": "3.0.3",
+      "matplotlib": "3.11.0",
+      "posthog": "3.25.0"
+    }
+  },
+  "hardware": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD",
+    "logical_cpu_count": 24,
+    "total_memory_bytes": 68638711808,
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 4080",
+        "memory_mib": "16376",
+        "driver": "596.49"
+      }
+    ]
+  },
+  "ollama": {
+    "version": "0.11.5",
+    "base_url": "http://localhost:11434",
+    "models": {
+      "nomic-embed-text:latest": {
+        "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+        "size": 274302450,
+        "modified_at": "2026-07-16T12:05:39.0204305-05:00",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "nomic-bert",
+          "families": [
+            "nomic-bert"
+          ],
+          "parameter_size": "137M",
+          "quantization_level": "F16"
+        }
+      },
+      "qwen2.5:7b-instruct-q4_K_M": {
+        "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+        "size": 4683087332,
+        "modified_at": "2025-08-19T23:00:03.1867291-05:00",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M"
+        }
+      }
+    }
+  },
+  "inputs": {
+    "config_path": "C:\\Projects\\RAGtest\\evaluation\\experiments.yaml",
+    "config_sha256": "ed361e16fedced7276e3751662c393b1a5be4e8f42366958cc74cc8e5e611c56",
+    "golden_path": "C:\\Projects\\RAGtest\\evaluation\\golden.jsonl",
+    "golden_sha256": "1f9c5715f286a602b3fcb28a352841631540293a65736de92eeedf4cddbbd9a5",
+    "manifest_path": "C:\\Projects\\RAGtest\\evaluation\\corpus_manifest.yaml",
+    "manifest_sha256": "10f60c74bbaeb7877c35f4f2c93eeb60c653e74a8006735a0e7c66b232c4dc90",
+    "corpus_sha256": "eb2fc9ee7f8dacb5e52a93d7a003e1830503b6938bb6d45370b24a1be29e7157",
+    "prompt_sha256": "6ee548abceb2e48dd697257cceb55e5d1ef3593900b64859860d606405d39f86"
+  },
+  "configuration": {
+    "version": 1,
+    "name": "meridian-v1",
+    "dataset": "evaluation/golden.jsonl",
+    "corpus_manifest": "evaluation/corpus_manifest.yaml",
+    "output_dir": "artifacts/evaluation",
+    "seed": 7,
+    "runs": {
+      "warmup_queries": 1,
+      "measured_repetitions": 1
+    },
+    "models": {
+      "embedding": {
+        "provider": "ollama",
+        "base_url": "http://localhost:11434",
+        "model": "nomic-embed-text:latest"
+      },
+      "generation": {
+        "provider": "ollama",
+        "base_url": "http://localhost:11434",
+        "model": "qwen2.5:7b-instruct-q4_K_M",
+        "temperature": 0,
+        "max_tokens": 256,
+        "context_window": 8192
+      }
+    },
+    "prompt": {
+      "system": "You are a precise research assistant. Use only the supplied context.\nIf the context does not contain the answer, respond exactly: I don't know based on the provided context.\nCite supporting context IDs in square brackets, such as [S1].\nDo not cite a context ID that does not support the claim.\n",
+      "template": "<question>\n{question}\n</question>\n\n<context>\n{context}\n</context>\n\nAnswer concisely. Put citations immediately after the claims they support.\n"
+    },
+    "retrieval": {
+      "top_k": 6,
+      "min_score": null,
+      "rerank": false
+    },
+    "experiments": [
+      {
+        "id": "baseline_900_150",
+        "description": "Existing paper-profile chunk geometry.",
+        "chunking": {
+          "profile": "paper",
+          "size": 900,
+          "overlap": 150
+        }
+      },
+      {
+        "id": "focused_500_80",
+        "description": "Smaller chunks with proportionally similar overlap.",
+        "chunking": {
+          "profile": "paper",
+          "size": 500,
+          "overlap": 80
+        }
+      }
+    ]
+  },
+  "summary_sha256": "f2b042d51c3febaebe6df8cd4d26df3e231544e1675895648f18ffe2882661b8",
+  "per_question_sha256": "9921bbb9ff754b199ad9a8fdf60d0fcdb12a10459e96c4e127f1f028d423c0a1"
+}

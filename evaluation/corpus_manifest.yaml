@@ -1,0 +1,55 @@
+schema_version: "1.0"
+corpus_name: Meridian Research Cooperative Operations Handbook
+description: >-
+  Eight fictional, project-authored operations documents with intentionally
+  overlapping terminology for local retrieval evaluation.
+license: MIT
+documents:
+  - id: access_control
+    path: corpus/access_control.md
+    title: Meridian Access and Visitor Control Standard
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: 17e97722b60d01e86f43ce2e5fc15996b7b55b714b83ff4571fe052451214912
+  - id: backup_recovery
+    path: corpus/backup_recovery.md
+    title: Meridian Backup and Recovery Runbook
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: 71e2f7cd353a78b3011ee6e7e46fd8ae9638e862ca8eaec36b75d47e9b0bf6f5
+  - id: cold_chain_shipping
+    path: corpus/cold_chain_shipping.md
+    title: Meridian Cold-Chain Shipping Procedure
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: a44b5a73f3e135a341670485f957b75b45e2f51a53463ab16d95e8fbe5f81797
+  - id: data_retention
+    path: corpus/data_retention.md
+    title: Meridian Information Retention Schedule
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: 09be45b6f0028596af397ee01b4685aaec735f4389b683218a328198e501d46e
+  - id: fleet_maintenance
+    path: corpus/fleet_maintenance.md
+    title: Meridian Field Fleet Maintenance Manual
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: aab1ba70b0c12d01476f12c6f8ab83d49b410a8ce29359aa5b8b2b4aecf8618c
+  - id: incident_response
+    path: corpus/incident_response.md
+    title: Meridian Incident Response Procedure
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: d50b5558fe2d18066545c3ef4331a745083debbbce5c3588055eff938e8eec79
+  - id: remote_site_networking
+    path: corpus/remote_site_networking.md
+    title: Meridian Remote Site Connectivity Handbook
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: 6ba57b0f5b7e7d1ac9315b64d92e6ac16e8d91738aa70b9862a78598a8220276
+  - id: sensor_calibration
+    path: corpus/sensor_calibration.md
+    title: Meridian Environmental Sensor Calibration Guide
+    provenance: Project-authored fictional policy corpus, 2026-07-16.
+    license: MIT
+    sha256: fc98bc7f14d39ee35024fe9a1d5a5332171e5b920994cb00e83cdee58cffdf38

@@ -1,0 +1,68 @@
+"""Public, dependency-light building blocks for the RAG evaluation lab."""
+
+from .citations import (
+    citation_metrics,
+    citation_validity_rate,
+    cited_hits,
+    parse_citation_numbers,
+    parse_citations,
+)
+from .dataset import (
+    DatasetValidationError,
+    MAX_GOLDEN_QUESTIONS,
+    MIN_GOLDEN_QUESTIONS,
+    load_golden_dataset,
+    load_manifest,
+    sha256_file,
+    validate_dataset,
+    validate_golden_dataset,
+    validate_manifest,
+)
+from .metrics import (
+    abstention_accuracy,
+    abstention_correct,
+    evidence_recall_at_k,
+    is_abstention,
+    latency_percentiles,
+    mean_reciprocal_rank,
+    percentile,
+    recall_at_k,
+    reciprocal_rank,
+    required_fact_coverage,
+    required_fact_matches,
+    retrieval_metrics,
+    source_id_from_hit,
+    text_from_hit,
+)
+
+
+__all__ = [
+    "DatasetValidationError",
+    "MAX_GOLDEN_QUESTIONS",
+    "MIN_GOLDEN_QUESTIONS",
+    "abstention_accuracy",
+    "abstention_correct",
+    "citation_metrics",
+    "citation_validity_rate",
+    "cited_hits",
+    "evidence_recall_at_k",
+    "is_abstention",
+    "latency_percentiles",
+    "load_golden_dataset",
+    "load_manifest",
+    "mean_reciprocal_rank",
+    "parse_citation_numbers",
+    "parse_citations",
+    "percentile",
+    "recall_at_k",
+    "reciprocal_rank",
+    "required_fact_coverage",
+    "required_fact_matches",
+    "retrieval_metrics",
+    "sha256_file",
+    "source_id_from_hit",
+    "text_from_hit",
+    "validate_dataset",
+    "validate_golden_dataset",
+    "validate_manifest",
+]

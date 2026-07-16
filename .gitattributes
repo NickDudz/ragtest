@@ -1,0 +1,7 @@
+# Evaluation inputs and reference artifacts are byte-hashed. Keep their text
+# representation stable even when a contributor enables core.autocrlf.
+evaluation/** text eol=lf
+artifacts/evaluation/** text eol=lf
+artifacts/evaluation/**/*.png -text -eol
+# Corpus metadata uses Markdown hard breaks; preserve and permit those spaces.
+evaluation/corpus/*.md whitespace=-blank-at-eol

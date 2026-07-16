@@ -8,14 +8,22 @@ def retrieve(storage_dir: str, embedder: OllamaEmbedder, question: str, top_k: i
     collection = vectordb.get_or_create_collection(storage_dir, "rag")
     qvec = embedder.embed([question])
     res = vectordb.query(collection, qvec, top_k=top_k)
-    # Chroma doesn't return distances by default when querying with embeddings.
-    # If using similarity scores, one can store and compute externally. Here we only return texts + metadatas.
+    # Keep min_score for API compatibility. Chroma returns a distance whose scale
+    # depends on the collection metric, so it is not treated as a similarity score.
+    _ = min_score
+
+    ids = (res.get("ids") or [[]])[0]
+    documents = (res.get("documents") or [[]])[0]
+    metadatas = (res.get("metadatas") or [[]])[0]
+    distances = (res.get("distances") or [[]])[0]
     docs = []
-    for i in range(len(res.get("ids", [[]])[0])):
+    for i, chunk_id in enumerate(ids):
+        distance = distances[i] if i < len(distances) else None
         docs.append({
-            "id": res["ids"][0][i],
-            "text": res["documents"][0][i],
-            "meta": res["metadatas"][0][i],
+            "id": chunk_id,
+            "text": documents[i] if i < len(documents) else "",
+            "meta": metadatas[i] if i < len(metadatas) and metadatas[i] is not None else {},
+            "distance": float(distance) if distance is not None else None,
             "score": None,
         })
     return docs

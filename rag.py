@@ -5,6 +5,7 @@ import typer
 from rich import print
 from rich.table import Table
 from ragtoolkit.pipeline import read_config, ingest_corpus, ask_question, save_answer
+from ragtoolkit.evaluation.runner import run_evaluation
 
 app = typer.Typer(add_completion=False, help="""
 Local RAG Toolkit — ingest documents and ask questions with citations.
@@ -92,6 +93,21 @@ def web(
     print(f"[green]Starting web server at[/green] http://{host}:{port}")
     print("[cyan]Press Ctrl+C to stop[/cyan]")
     uvicorn.run("web_server:app", host=host, port=port, reload=False)
+
+
+@app.command("eval")
+def evaluate(
+    config: str = typer.Option(
+        "evaluation/experiments.yaml",
+        help="Path to the evaluation experiment configuration",
+    ),
+):
+    """Run the reproducible retrieval and answer evaluation suite."""
+    if not os.path.isfile(config):
+        print(f"[red]Evaluation config not found:[/red] {config}")
+        raise typer.Exit(code=1)
+    artifact_dir = run_evaluation(config)
+    print(f"[green]Evaluation complete[/green]: {artifact_dir}")
 
 if __name__ == "__main__":
     app()

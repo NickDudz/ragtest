@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "run_id": "meridian-v1-20260716T175543Z-c3a8dabf",
+  "dataset": {
+    "corpus_name": "Meridian Research Cooperative Operations Handbook",
+    "documents": 8,
+    "questions": 30,
+    "answerable_questions": 25,
+    "unanswerable_questions": 5
+  },
+  "experiments": [
+    {
+      "id": "baseline_900_150",
+      "chunking": {
+        "profile": "paper",
+        "size": 900,
+        "overlap": 150
+      },
+      "index": {
+        "documents": 8,
+        "chunks": 16,
+        "embedding_seconds": 3.146947499999442,
+        "upsert_seconds": 0.07119080000120448,
+        "ingest_seconds": 3.9771013999998104,
+        "distance_metric": "cosine",
+        "cache_path": "C:\\Projects\\RAGtest\\.eval_cache\\meridian-v1-20260716T175543Z-c3a8dabf\\baseline_900_150"
+      },
+      "metrics": {
+        "recall_at_1": 0.6,
+        "recall_at_3": 0.84,
+        "recall_at_5": 0.88,
+        "evidence_recall_at_1": 0.34,
+        "evidence_recall_at_3": 0.6,
+        "evidence_recall_at_5": 0.7533333333333333,
+        "mrr": 0.7746666666666667,
+        "citation_valid_id_rate": 1.0,
+        "citation_presence_rate": 0.92,
+        "citation_source_precision": 0.76,
+        "citation_source_recall": 0.72,
+        "required_fact_coverage": 0.5233333333333333,
+        "abstention_accuracy": 1.0
+      },
+      "latency_ms": {
+        "query_embedding": {
+          "count": 30,
+          "mean": 2064.298423333397,
+          "min": 2041.4851000005,
+          "p50": 2058.24069999926,
+          "p95": 2092.0059500004754,
+          "max": 2105.6855999995605
+        },
+        "vector_search": {
+          "count": 30,
+          "mean": 4.190986666738657,
+          "min": 3.3772000006138114,
+          "p50": 4.121699999814155,
+          "p95": 4.955530000370345,
+          "max": 5.318699999406817
+        },
+        "retrieval": {
+          "count": 30,
+          "mean": 2068.489410000135,
+          "min": 2045.4836000008072,
+          "p50": 2062.662499999533,
+          "p95": 2096.565090000604,
+          "max": 2110.1238999999623
+        },
+        "generation": {
+          "count": 30,
+          "mean": 4047.167483332911,
+          "min": 2807.1168000005855,
+          "p50": 4061.779599998772,
+          "p95": 4498.906249999618,
+          "max": 4620.411899999453
+        },
+        "end_to_end": {
+          "count": 30,
+          "mean": 6115.687843333338,
+          "min": 4860.019199999442,
+          "p50": 6121.504499999901,
+          "p95": 6589.639564999379,
+          "max": 6678.5767000001215
+        }
+      },
+      "questions": 30,
+      "answerable_questions": 25,
+      "unanswerable_questions": 5
+    },
+    {
+      "id": "focused_500_80",
+      "chunking": {
+        "profile": "paper",
+        "size": 500,
+        "overlap": 80
+      },
+      "index": {
+        "documents": 8,
+        "chunks": 28,
+        "embedding_seconds": 2.4020987000003515,
+        "upsert_seconds": 0.07942130000083125,
+        "ingest_seconds": 2.9927511000005325,
+        "distance_metric": "cosine",
+        "cache_path": "C:\\Projects\\RAGtest\\.eval_cache\\meridian-v1-20260716T175543Z-c3a8dabf\\focused_500_80"
+      },
+      "metrics": {
+        "recall_at_1": 0.76,
+        "recall_at_3": 0.94,
+        "recall_at_5": 0.94,
+        "evidence_recall_at_1": 0.32,
+        "evidence_recall_at_3": 0.58,
+        "evidence_recall_at_5": 0.7866666666666667,
+        "mrr": 0.92,
+        "citation_valid_id_rate": 1.0,
+        "citation_presence_rate": 0.88,
+        "citation_source_precision": 0.88,
+        "citation_source_recall": 0.8,
+        "required_fact_coverage": 0.5433333333333333,
+        "abstention_accuracy": 1.0
+      },
+      "latency_ms": {
+        "query_embedding": {
+          "count": 30,
+          "mean": 2063.7642200001815,
+          "min": 2039.7722000016074,
+          "p50": 2059.7566499991444,
+          "p95": 2084.0416249990085,
+          "max": 2095.2198000013595
+        },
+        "vector_search": {
+          "count": 30,
+          "mean": 4.06804333342734,
+          "min": 3.04130000040459,
+          "p50": 4.125899999962712,
+          "p95": 4.629010000189737,
+          "max": 5.4049999998824205
+        },
+        "retrieval": {
+          "count": 30,
+          "mean": 2067.832263333609,
+          "min": 2044.1836000027251,
+          "p50": 2063.830600000074,
+          "p95": 2087.678274999598,
+          "max": 2099.5929000018805
+        },
+        "generation": {
+          "count": 30,
+          "mean": 3410.5540333334525,
+          "min": 2969.763500001136,
+          "p50": 3369.030699999712,
+          "p95": 3831.893580000269,
+          "max": 4040.2930000000197
+        },
+        "end_to_end": {
+          "count": 30,
+          "mean": 5478.417060000235,
+          "min": 5036.873000000924,
+          "p50": 5435.007950000909,
+          "p95": 5891.779370000768,
+          "max": 6084.50190000076
+        }
+      },
+      "questions": 30,
+      "answerable_questions": 25,
+      "unanswerable_questions": 5
+    }
+  ]
+}
